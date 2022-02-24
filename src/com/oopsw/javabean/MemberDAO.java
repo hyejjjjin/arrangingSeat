@@ -35,6 +35,9 @@ public class MemberDAO {
 		rs.close();
 		pstmt.close();
 
+		if(result == 0) {
+			throw new SQLException("로그인 에러");
+		}
 		return result;
 	}
 
@@ -208,6 +211,23 @@ public class MemberDAO {
 		pstmt.close();
 
 		return result;
+	}
+	
+	public Collection<Member> searchClassMate(int educationNumber) throws SQLException {
+		Collection<Member> memberList = new ArrayList<Member>();
+		String sql = "select m.member_id as memberId, m.name as name "
+				+ "from members m, education_historys eh "
+				+ "where eh.education_number=? and m.member_id = eh.member_id ";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, educationNumber);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			memberList.add(new Member(rs.getInt("memberId"), rs.getString("name"),"","","",""));
+		}
+		rs.close();
+		pstmt.close();
+		//conn.close()
+		return memberList;
 	}
 
 }

@@ -38,13 +38,19 @@ public class ControllerServlet extends HttpServlet {
 			a = new MyPageUI();
 			break;
 		case "arrangeSeatUI":
-			url = "arrangeSeat.jsp";
+			a = new ArrangeSeatUI();
+			break;
+		case "arrangeSeatAction":
+			a = new ArrangeSeatAction();
 			break;
 		case "arrangeSeatHistoryUI":
 			a = new ArrangeSeatHistoryUI();
 			break;
-		case "roomInfoSearch":
-			a = new RoomInfoSearchAction();
+		case "arrangedRoomSearch":
+			a = new ArrangedRoomSearchAction();
+			break;
+		case "educationInfoSearch":
+			a = new EducationInfoSearchAction();
 			break;
 		case "arrangeSeatHistory":
 			a = new ArrangeSeatHistoryAction();

@@ -51,7 +51,7 @@
 	</nav>
 
 	<div>
-	  <form action="controller?cmd=roomInfoSearch" method="post">
+	  <form action="controller?cmd=arrangedRoomSearch" method="post">
 		<div>
 			<input type="date" name="date" >
 			<input type="submit" value="강의실조회">
@@ -81,32 +81,6 @@
 		       </tr>
 		   </c:forEach> 
 		   
-			<!-- 
-			<tr><td>유영균</td>
-				<td>김은혜</td>
-				<td>정태연</td>
-				<td>이유림</td>
-				<td>배수민</td>
-				<td>엄상인</td>
-				<td>최다연</td>
-				<td>최다연</td></tr>
-			<tr><td>김성은</td>
-				<td>박기웅</td>
-				<td>오재욱</td>
-				<td>이현정</td>
-				<td>노경환</td>
-				<td>김문정</td>
-				<td>권유진</td>
-				<td>오동근</td></tr>
-			<tr><td>이창희</td>
-				<td>박혜진</td>
-				<td>임한솔</td>
-				<td>채수빈</td>
-				<td>박동은</td>
-				<td>윤태완</td>
-				<td>김정현</td>
-				<td>이항영</td></tr>
-			-->
 		</table>
 		<script type="text/javascript">
 		    var rows = document.getElementsByTagName("tr");
