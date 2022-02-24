@@ -20,33 +20,32 @@
 <style type="text/css">
 #search {
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
 	<ul class="navbar-nav">
-		<li class="nav-item"><a class="nav-link "
-			href="controller?cmd=myPageUI">홈</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">우리반교육생조회</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">자리배치이력조회</a></li>
+		<li class="nav-item"><a class="nav-link " href="controller?cmd=myPageUI">홈</a></li>
+		<li class="nav-item"><a class="nav-link" href="controller?cmd=searchMemberUI">우리반교육생조회</a></li>
+		<li class="nav-item "><a class="nav-link" href="controller?cmd=arrangeSeatHistoryUI">자리배치이력조회</a></li>
 		<c:if test="${memberVO.isLeader == true}">
-			<li class="nav-item"><a class="nav-link " href="#">자리배치하기</a></li>
+			<li class="nav-item"><a class="nav-link " href="controller?cmd=arrangeSeatUI">자리배치하기</a></li>
 		</c:if>
 		<li class="nav-item active"><a class="nav-link" href="controller?cmd=roomInfoAction">전체강의실조회</a></li>
 	</ul>
-	<a class="btn btn-outline-light" href="controller?cmd=logoutAction" style="margin-left: auto;">로그아웃</a> </nav>
-	<c:if test="${paramValues.roomNumber == null}">
-		<form id="search" action="controller?cmd=searchRoomAction">
-			강의실 검색 : <select name="rooms">
-				<option value=" " selected disabled>-- 선택 --</option>
-				<c:forEach var="room" items="${roomList}">
-					<option value=${room.roomNumber} selected>${room.location}</option>
-				</c:forEach>
-			</select>
-			<input type="submit" class="btn btn-primary" value="조회">
-			<br>
-		</form>
+	<a class="btn btn-outline-light" href="controller?cmd=logoutAction" role="button" style="margin-left:auto;">로그아웃</a>
+	</nav>
+	<c:if test="${roomList != null}">
+		강의실 검색 : <select name="roomNumber" required>
+			<option value="" disabled selected>-- 선택 --</option>
+			<c:forEach var="room" items="${roomList}">
+				<option value=${room.roomNumber} onclick="onClickRoom">${room.location}</option>
+			</c:forEach>
+		</select>
+		<a class="btn btn-primary">조회</a>
 		<hr style='border: solid 2px black'>
 	</c:if>
 	<!-- first div ------------------------------------  -->
@@ -102,9 +101,16 @@
 	<!-- second div end ------------------------------------  -->
 	
 	<script type="text/javascript">
-		document.querySelector('select').onclick = function() {
-			
+	function onClickRoom(value){
+		console.log(value);
+	}
+	document.querySelectorAll("a")[5].onclick = function() {
+		for(option in document.querySelector("select")){
+			option.onclick="onClickRoom";
 		}
+		
+		//controller?cmd=searchRoomAction
+	}	
 	</script>
 </body>
 </html>
