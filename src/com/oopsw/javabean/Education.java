@@ -1,6 +1,5 @@
 package com.oopsw.javabean;
 
-
 public class Education {
 	private int educationNumber;
 	private String name;
@@ -9,12 +8,6 @@ public class Education {
 	private String teacherName;
 	private int roomNumber;
 	
-	
-	
-	public Education(int educationNumber, int roomNumber) {
-		this(educationNumber, "", "","" , "", roomNumber);
-	}
-
 	public Education(int educationNumber, String name, String startDate, String endDate, String teacherName,
 			int roomNumber) {
 		super();

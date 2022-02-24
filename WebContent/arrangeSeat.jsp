@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,9 +15,8 @@
      margin-bottom: 10px;
    }
   </style>
-<script>
-  
-</script>
+
+
 <style type="text/css">
 	table {
 		width: 60%;
@@ -37,21 +34,21 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="header">
 
   <ul class="navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item active">
       <a class="nav-link" href="#">전체강의실조회</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">우리반교육생조회</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="controller?cmd=arrangeSeatUI">자리배치이력조회</a>
+      <a class="nav-link" href="#">자리배치이력조회</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="controller?cmd=arrangeSeatUI">자리배치하기(반장일때만)</a>
+      <a class="nav-link " href="#">자리배치하기(반장일때만)</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-link " href="#">홈으로</a>
+      <a class="nav-link " href="myPage.html">홈으로</a>
     </li>
     
     
@@ -60,79 +57,44 @@
 
 	<div>
 		<div>
-		<form action="controller?cmd=educationInfoSearch" method="post">
-			<input type="date" name="startDate" value="${startDate}">
-			~ <input type="date" name="endDate" value="${endDate}">
-			<input type="submit" value="조회">
-		</form>
+			<input type="date" value="2022-02-18">
+			~ <input type="date" >
+			<input type="button" value="자리배치 하기">
 		</div>
-		
-	<form action="controller?cmd=arrangeSeatAction" method="post">
-	   <input type="hidden" name="rowCount" value="${roomVO.rowCount}">
-	   <input type= "hidden" name="colCount" value ="${roomVO.colCount}">
-		<input type="hidden" name="startDate" value="${startDate}">
-		<input type="hidden" name="endDate" value="${endDate}">
-		<input type="hidden" name="educationNumber" value="${educationNumber}">
-		<input type="hidden" name="roomNumber" value="${roomVO.roomNumber}">
 		<div>
-			강의실: <input type="text" readonly="readonly" value="${roomVO.location}"> 
-			<input type="submit" id="" value="자리배치 하기">
+			강의실: <input type="text" readonly="readonly" value="2501호">
 		</div>
 	</div>
 	<hr width="100%" color="black">
 	<div>
-	
-	<c:if test="${seatHistoryList==null}">
 		<table border="1">
-		<c:set var="col" value="${roomVO.colCount}"></c:set>
-			<tr><th colspan="${roomVO.colCount}">칠판</th></tr>
-			<c:forEach var="i" begin="1" end="${roomVO.rowCount}">
-		       <tr>
-		       <c:forEach var="j" begin="1" end="${roomVO.colCount}">
-		           <td>
-		           
-		           공석 <input type="checkbox"  name="checkbox" value=${(i-1)*col+j}>
-		           </td>
-		       </c:forEach>
-		       </tr>
-		   </c:forEach> 
-			
+			<tr><th colspan="8">칠판</th></tr>
+			<tr><td>유영균</td>
+				<td>김은혜</td>
+				<td>정태연</td>
+				<td>이유림</td>
+				<td>배수민</td>
+				<td>엄상인</td>
+				<td>최다연</td>
+				<td>X</td></tr>
+			<tr><td>김성은</td>
+				<td>박기웅</td>
+				<td>오재욱</td>
+				<td>이현정</td>
+				<td>노경환</td>
+				<td>김문정</td>
+				<td>권유진</td>
+				<td>오동근</td></tr>
+			<tr><td>이창희</td>
+				<td>박혜진</td>
+				<td>임한솔</td>
+				<td>채수빈</td>
+				<td>박동은</td>
+				<td>윤태완</td>
+				<td>김정현</td>
+				<td>이항영</td></tr>
 		</table>
-	</c:if>
-	
-	<c:if test="${seatHistoryList!=null}">
-	   <table border="1">
-		
-		   <tr><th colspan="${roomVO.colCount}">칠판</th></tr>
-		   <c:forEach var="i" begin="1" end="${roomVO.rowCount}">
-		       <tr>
-		       <c:forEach var="j" begin="1" end="${roomVO.colCount}">
-		           <td>빈자리</td>
-		       </c:forEach>
-		       </tr>
-		   </c:forEach> 
-		</table>
-		<c:forEach items="${emptyList}" var="item">
-		       <input type="checkbox"  name="checkbox" value=${item} checked="checked" style="display:none">
-		</c:forEach>
-    </c:if>
-    <script type="text/javascript">
-            var rows = document.getElementsByTagName("tr");
-		     //console.log(rows.length+"row");
-		    <c:forEach items="${seatHistoryList}" var="item">
-		      	console.log("${item.rowNumber}"  + "${item.colNumber}")
-		      	var row = parseInt("${item.rowNumber}")+1;
-		      	var col = parseInt("${item.colNumber}");
-		    
-		      	var cells = rows[row];
-		      	var cells2 = cells.getElementsByTagName("td")[col].firstChild;
-		      	cells2.data = "${item.memberName}(${item.memberId})";
-		     </c:forEach>
-	  </script>
-    
-	
 	</div>
-	</form>
 	<hr width="100%" color="black">
 	<div align="right">
 		<input type="button" value="자리확정하기">
