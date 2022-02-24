@@ -33,4 +33,25 @@ public class EducationDAO {
 
 		return result;
 	}
+	
+	public Education searchEducation(String startDate, String endDate, int memberId) throws SQLException {
+		Education result = null;
+		String sql = "select e.room_number as roomNumber, e.education_number as educationNumber"
+				+ " FROM educations e, education_historys eh"
+				+ " WHERE ? >= e.start_date AND e.end_date >= ? and eh.education_number = e.education_number"
+				+ " AND eh.member_id = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, startDate);
+		pstmt.setString(2, endDate);
+		pstmt.setInt(3, memberId);
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+			result = new Education(rs.getInt("educationNumber"), rs.getInt("roomNumber"));
+		rs.close();
+		pstmt.close();
+
+		return result;
+	}
+	
 }

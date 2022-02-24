@@ -14,16 +14,15 @@ public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 모든 요청 서블릿 1개가 대표
 
-		// 페이지 분할
+		//페이지 분할
 		String cmd = request.getParameter("cmd");
 		String url = "error.jsp";
 
-		// 요청 처리
-		Action a = null;
+		//요청 처리
+        Action a = null;
 		switch (cmd) {
 		case "loginUI":
 			a = new LoginUI();
@@ -38,44 +37,41 @@ public class ControllerServlet extends HttpServlet {
 			a = new MyPageUI();
 			break;
 		case "arrangeSeatUI":
-			url = "arrangeSeat.jsp";
+			a = new ArrangeSeatUI();
+			break;
+		case "arrangeSeatAction":
+			a = new ArrangeSeatAction();
 			break;
 		case "arrangeSeatHistoryUI":
 			a = new ArrangeSeatHistoryUI();
 			break;
-		case "roomInfoSearch":
-			a = new RoomInfoSearchAction();
+		case "arrangedRoomSearch":
+			a = new ArrangedRoomSearchAction();
+			break;
+		case "educationInfoSearch":
+			a = new EducationInfoSearchAction();
 			break;
 		case "arrangeSeatHistory":
 			a = new ArrangeSeatHistoryAction();
 			break;
+				
 		case "arrangeSeatNoHistoryUI":
 			url = "arrangeSeatNoHistory.jsp";
 			break;
-		case "roomInfoUI":
-			a = new RoomInfoUI();
-			break;
-		case "searchRoomAction":
-			a = new SearchRoomAction();
-			break;
-		case "roomInfoAction":
-			a = new RoomInfoAction();
-			break;
-
+			
 		}
 		try {
 			url = a.execute(request);
-		} catch (SeatHistoryNotFoundException e) {
+		}catch(SeatHistoryNotFoundException e) {
 			request.setAttribute("dateError", true);
 			url = "arrangeSeatHistory.jsp";
-		} catch (RoomListNotFoundException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException | SQLException e) {
+		}
+		catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		request.getRequestDispatcher("/" + url).forward(request, response);
+		
+		request.getRequestDispatcher("/"+url).forward(request, response);
 	}
 
 }
