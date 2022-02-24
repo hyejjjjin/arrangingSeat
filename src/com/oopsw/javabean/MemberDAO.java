@@ -21,21 +21,22 @@ public class MemberDAO {
 		System.out.println("1, 2, conn ok");
 	}
 
-	public int login(String loginId, String password) throws SQLException {
-		int result = 0;
-		String sql = "select member_id as memberId from members where login_Id=? and password=?";
+	public Member login(String loginId, String password) throws SQLException {
+		Member result = null;
+		String sql = "select m.member_id as memberId, eh.is_leader as isLeader from members m, education_historys eh"
+				+ " where m.login_Id=? and m.password=? and m.member_id = eh.member_id";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, loginId);
 		pstmt.setString(2, password);
 
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
-			result = rs.getInt("memberId");
+			result = new Member(rs.getInt("memberId"), rs.getBoolean("isLeader"));
 
 		rs.close();
 		pstmt.close();
 
-		if(result == 0) {
+		if(result == null) {
 			throw new SQLException("로그인 에러");
 		}
 		return result;

@@ -17,6 +17,10 @@ public class Member {
 	private String department;
 	private String position;
 
+	Member(int memberId, boolean isLeader){
+		this(memberId, "", "", "", "", "", "", "", isLeader, 0, "", 0, "", "", "");
+	}
+	
 	Member(String name, String birthday, String phoneNumber, String email, String picture, boolean isLeader,
 			String educationName, String roomLocation) {
 		this(0, "", "", email, phoneNumber, name, birthday, picture, isLeader, 0, educationName, 0, roomLocation, "",

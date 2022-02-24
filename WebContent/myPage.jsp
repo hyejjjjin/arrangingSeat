@@ -27,7 +27,7 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 	<ul class="navbar-nav">
-		<li class="nav-item active"><a class="nav-link " href="controller?cmd=myPageUI">홈</a></li>
+		<li class="nav-item active"><a class="nav-link " href="controller?cmd=myPageAction">홈</a></li>
 		<li class="nav-item"><a class="nav-link" href="controller?cmd=searchMemberUI">우리반교육생조회</a></li>
 		<li class="nav-item "><a class="nav-link" href="controller?cmd=arrangeSeatHistoryUI">자리배치이력조회</a></li>
 		<c:if test="${memberVO.isLeader == true}">
@@ -35,6 +35,9 @@
 		</c:if>
 		<li class="nav-item"><a class="nav-link" href="controller?cmd=roomInfoAction">전체강의실조회</a></li>
 	</ul>
+	<form action="controller?cmd=logoutAction" method="post">
+	<input type="submit" value="강력 로그아웃">
+	</form>
 	<a class="btn btn-outline-light" href="controller?cmd=logoutAction" role="button" style="margin-left:auto;">로그아웃</a>
 	</nav>
 
@@ -44,7 +47,7 @@
 			<div>
 				${memberVO.name}
 				<span class="badge badge-primary text-wrap" style="width: 10rem; background-color:#89BFFF;">${memberVO.educationName}(${memberVO.roomLocation})</span>
-				<c:if test="${memberVO.isLeader == true}">
+				<c:if test="${isLeader == true}">
 					<span class="badge badge-primary text-wrap" style="width: 6rem; background-color:#FF8989;">반장</span>
 				</c:if>
 			</div>

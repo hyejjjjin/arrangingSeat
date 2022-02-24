@@ -12,6 +12,7 @@ public class LogoutAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
+
 		// 서버의 메모리에 세션을 해제..
 		HttpSession session = request.getSession();
 		if (session != null) {

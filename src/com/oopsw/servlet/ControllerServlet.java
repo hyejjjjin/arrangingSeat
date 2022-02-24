@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/controller")
 public class ControllerServlet extends HttpServlet {
@@ -18,9 +19,17 @@ public class ControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. 모든 요청 서블릿 1개가 대표
 
+		HttpSession session = request.getSession();
+		Object memberId = session.getAttribute("memberId");
+
 		// 페이지 분할
 		String cmd = request.getParameter("cmd");
 		String url = "error.jsp";
+		
+		if(memberId == null && !cmd.equals("loginAction"))
+			cmd = "loginUI";
+		else if(memberId !=null && cmd.equals("loginUI"))
+			cmd = "myPageUI";
 
 		// 요청 처리
 		Action a = null;
@@ -36,6 +45,9 @@ public class ControllerServlet extends HttpServlet {
 			break;
 		case "myPageUI":
 			a = new MyPageUI();
+			break;
+		case "myPageAction":
+			a = new MyPageAction();
 			break;
 		case "arrangeSeatUI":
 			a = new ArrangeSeatUI();

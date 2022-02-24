@@ -48,10 +48,10 @@
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 	<ul class="navbar-nav">
-		<li class="nav-item"><a class="nav-link " href="controller?cmd=myPageUI">홈</a></li>
+		<li class="nav-item"><a class="nav-link " href="controller?cmd=myPageAction">홈</a></li>
 		<li class="nav-item active"><a class="nav-link" href="controller?cmd=searchMemberUI">우리반교육생조회</a></li>
 		<li class="nav-item "><a class="nav-link" href="controller?cmd=arrangeSeatHistoryUI">자리배치이력조회</a></li>
-		<c:if test="${memberVO.isLeader == true}">
+		<c:if test="${isLeader == true}">
 			<li class="nav-item"><a class="nav-link " href="controller?cmd=arrangeSeatUI">자리배치하기</a></li>
 		</c:if>
 		<li class="nav-item"><a class="nav-link" href="controller?cmd=roomInfoAction">전체강의실조회</a></li>
