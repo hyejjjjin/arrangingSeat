@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.oopsw.javabean.ArrangeSeatListVO;
 import com.oopsw.javabean.Member;
 import com.oopsw.javabean.MemberDAO;
 import com.oopsw.javabean.Room;
@@ -48,17 +49,17 @@ public class ArrangeSeatAction implements Action {
 		//3. 자리배치 테이블에 삽입하기.
 		Collection<SeatHistory> shList = shuffleSeat(memberList, rowCount, colCount, startDate, endDate, educationNumber, roomNumber, emptySeats);
 		
-		for(SeatHistory sh : shList) {
-			System.out.println(sh);
-		}
 		
+		ArrangeSeatListVO listVO = new ArrangeSeatListVO(shList);
 		
-		request.setAttribute("seatHistoryList", shList);
+		request.setAttribute("list", listVO);
 		request.setAttribute("roomVO", room);
 		request.setAttribute("startDate", startDate);
 		request.setAttribute("endDate", endDate);
 		request.setAttribute("educationNumber", educationNumber);
 		request.setAttribute("emptyList", emptySeats);
+		
+		
 		return  "arrangeSeat.jsp";
 	}
 	

@@ -31,6 +31,8 @@
 		text-align: center;
 	}
 </style>
+
+
 </head>
 <body>
 
@@ -57,7 +59,7 @@
 		</form>
 		</div>
 		
-	<form action="controller?cmd=arrangeSeatAction" method="post">
+	<form name = "seat" action="controller?cmd=arrangeSeatAction" method="post">
 	   <input type="hidden" name="rowCount" value="${roomVO.rowCount}">
 	   <input type= "hidden" name="colCount" value ="${roomVO.colCount}">
 		<input type="hidden" name="startDate" value="${startDate}">
@@ -72,7 +74,7 @@
 	<hr width="100%" color="black">
 	<div>
 	
-	<c:if test="${seatHistoryList==null}">
+	<c:if test="${list==null}">
 		<table border="1">
 		<c:set var="col" value="${roomVO.colCount}"></c:set>
 			<tr><th colspan="${roomVO.colCount}">칠판</th></tr>
@@ -90,7 +92,7 @@
 		</table>
 	</c:if>
 	
-	<c:if test="${seatHistoryList!=null}">
+	<c:if test="${list!=null}">
 	   <table border="1">
 		
 		   <tr><th colspan="${roomVO.colCount}">칠판</th></tr>
@@ -106,26 +108,37 @@
 		       <input type="checkbox"  name="checkbox" value=${item} checked="checked" style="display:none">
 		</c:forEach>
     </c:if>
-    <script type="text/javascript">
+	  
+	</div>
+	<hr width="100%" color="black">
+	<div align="right">
+		<input type="button" value="자리확정하기" onclick="insertArrangeSeat()">
+	</div>
+	
+	</form>
+	
+
+<script type="text/javascript">
             var rows = document.getElementsByTagName("tr");
 		     //console.log(rows.length+"row");
-		    <c:forEach items="${seatHistoryList}" var="item">
-		      	console.log("${item.rowNumber}"  + "${item.colNumber}")
+		     var s = "";
+		    <c:forEach items="${list.seatHistoryList}" var="item">
 		      	var row = parseInt("${item.rowNumber}")+1;
 		      	var col = parseInt("${item.colNumber}");
 		    
 		      	var cells = rows[row];
 		      	var cells2 = cells.getElementsByTagName("td")[col].firstChild;
 		      	cells2.data = "${item.memberName}(${item.memberId})";
+		      	s += (row-1)+"-"+col+"-"+"${item.memberId}"+"/";
 		     </c:forEach>
+		     
+		     function insertArrangeSeat() {
+		 		var theForm = document.seat;
+		 		theForm.action = "controller?cmd=insertSeatHistoryAction&seatHistorysInfo="+s;
+		        theForm.submit();
+		 	};
+		 	
+		 	
 	  </script>
-    
-	
-	</div>
-	</form>
-	<hr width="100%" color="black">
-	<div align="right">
-		<input type="button" value="자리확정하기">
-	</div>
 </body>
 </html>

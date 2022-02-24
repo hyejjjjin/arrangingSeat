@@ -55,6 +55,9 @@ public class ControllerServlet extends HttpServlet {
 		case "arrangeSeatAction":
 			a = new ArrangeSeatAction();
 			break;
+		case "insertSeatHistoryAction":
+			a = new InsertArrangeSeatAction();
+			break;
 		case "arrangeSeatHistoryUI":
 			a = new ArrangeSeatHistoryUI();
 			break;
@@ -64,6 +67,7 @@ public class ControllerServlet extends HttpServlet {
 		case "educationInfoSearch":
 			a = new EducationInfoSearchAction();
 			break;
+			
 		case "arrangeSeatHistory":
 			a = new ArrangeSeatHistoryAction();
 			break;
