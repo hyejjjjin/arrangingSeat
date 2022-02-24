@@ -18,10 +18,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이페이지</title>
-<link rel="stylesheet" type="text/css" href="myPage.css">
 </head>
-
-
 
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -41,7 +38,7 @@
 	<a class="btn btn-outline-light" href="controller?cmd=logoutAction" role="button" style="margin-left:auto;">로그아웃</a>
 	</nav>
 
-	<div id="myInfoLayout" style="background-color: lightgray; width: 1000px; border-radius: 50px; padding: 50px; margin: auto; margin-top:20px;">
+	<div id="myInfoLayout" style="background-color: lightgray; width: 400px; border-radius: 50px; padding: 50px; margin: auto; margin-top:20px;">
 		<img alt="프로필 사진" src="images/default-user-image.png" class="rounded mx-auto d-block" style="width:200px; height:200px; margin-bottom:20px;">
 		<div>
 			<div>

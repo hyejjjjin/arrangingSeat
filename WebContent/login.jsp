@@ -16,7 +16,7 @@
 	</div>
 	<div id="buttonsLayout">
 		<input type="submit" value="로그인">
-		<button>ID/PW 찾기</button>
+		<div style="color:blue;">*ID, PW는 관리자에게 문의하세요.</div>
 	</div>
 	</form>
 </body>
