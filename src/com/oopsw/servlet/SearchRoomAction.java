@@ -14,12 +14,12 @@ public class SearchRoomAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request)
 			throws ServletException, IOException, SQLException, ClassNotFoundException, SeatHistoryNotFoundException {
-		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
-
-		Room r = new RoomDAO().searchRoom(roomNumber);
+		
+		Room r = new RoomDAO().searchRoom(1);
 		request.setAttribute("roomVO", r);
+		System.out.println(r);
 
-		return "controller?cmd=roomInfoUI";
+		return "controller?cmd=searchedRoomInfo";
 	}
 
 }

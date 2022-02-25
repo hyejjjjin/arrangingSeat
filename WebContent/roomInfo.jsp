@@ -42,75 +42,59 @@
 		강의실 검색 : <select name="roomNumber" required>
 			<option value="" disabled selected>-- 선택 --</option>
 			<c:forEach var="room" items="${roomList}">
-				<option value=${room.roomNumber} onclick="onClickRoom">${room.location}</option>
+				<option value=${room.roomNumber}>${room.location}</option>
 			</c:forEach>
 		</select>
-		<a class="btn btn-primary">조회</a>
+		<input class="btn btn-primary" type="button" value="조회" onclick="requestRoomInfo()">
 		<hr style='border: solid 2px black'>
 	</c:if>
-	<!-- first div ------------------------------------  -->
-	<div style="float: left; margin-right: 100px;">
-		<h2>강의실 구조</h2>
-		<div>
-			<h2><${roomVO.location}></h2>
-		</div>
-		<table border="1">
-			<c:forEach var="i" begin="1" end="${roomVO.rowCount}">
-				<tr>
-					<c:forEach var="j" begin="1" end="${roomVO.colCount}">
-					<td>여석</td>
-					</c:forEach>
-				</tr>
-			</c:forEach>
-		</table>
-		<div>수용인원 : ${roomVO.capacity}명</div>
+	<div>
+		강의실을 선택하세요
 	</div>
-	<!-- first div end ------------------------------------  -->
-	<!-- second div start ------------------------------------  -->
-	<div style="float: left; width: 200px; height: 400px; border: 1px solid black">
-		<h1>비품 현황</h1>
-		<table border="1" id="2503_fixtures">
-			<th>목록</th>
-			<th>개수</th>
-			<tr>
-				<td>노트북</td>
-				<td>${roomVO.labtop}</td>
-			</tr>
-			<tr>
-				<td>캐비넷</td>
-				<td>${roomVO.cabinet}</td>
-			</tr>
-			<tr>
-				<td>모니터</td>
-				<td>${roomVO.monitor}</td>
-			</tr>
-			<tr>
-				<td>키보드</td>
-				<td>${roomVO.keyboard}</td>
-			</tr>
-			<tr>
-				<td>의자</td>
-				<td>${roomVO.chair}</td>
-			</tr>
-			<tr>
-				<td>책상</td>
-				<td>${roomVO.desk}</td>
-			</tr>
-		</table>
-	</div>
-	<!-- second div end ------------------------------------  -->
 	
 	<script type="text/javascript">
-	function onClickRoom(value){
-		console.log(value);
-	}
-	document.querySelectorAll("a")[5].onclick = function() {
-		for(option in document.querySelector("select")){
-			option.onclick="onClickRoom";
+	var xhr = null;
+	function getXMLHttpRequest(){
+		if(window.ActiveXObject){
+			try{
+				return new ActiveXObject("Msxml2.XMLHTTP");
+			}catch(e1){
+				try{
+					return new ActiveXObject("Microsoft.XMLHTTP");
+				}catch(e2){
+					return null;
+				}
+			}
+		} else if (window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		} else {
+			return null;
 		}
-		
-		//controller?cmd=searchRoomAction
-	}	
-	</script>
+	} //XMLHttpRequest 객체 생성
+	
+	function requestRoomInfo(URL) {
+		console.log("여긴 잘 타나?");
+		roomNumber = document.querySelector('select').value;
+		URL = "controller?cmd=searchRoomAction";// encodeURIComponent(param); //URL에 전송한 데이터 추가
+		xhr = getXMLHttpRequest(); //객체 얻기
+		xhr.onreadystatechange = responseRoomInfo; //서버에서 응답 준비가 되면 호출할 함수(콜백함수) 등록
+		xhr.open("POST", URL, true); //연결
+		xhr.send("roomNumber="+roomNumber); //전송
+	} //서버에 요청
+	
+	function responseRoomInfo(){
+		if(xhr.readyState == 4) {
+			if(xhr.status == 200) {
+				var str = xhr.responseText; //서버에서 보낸 내용 받기
+				//document.querySelectorAll('tr')[1].querySelectorAll('td')[1]= str; //요소 콘텐츠 변경
+				
+				console.log(typeof str);
+				console.log(str);
+			} else {
+				alert("Fail : "+ xhr.status);
+			}
+		}
+	} //응답
+</script>
 </body>
 </html>

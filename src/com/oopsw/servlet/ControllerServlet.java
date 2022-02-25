@@ -83,7 +83,9 @@ public class ControllerServlet extends HttpServlet {
 		case "roomInfoAction":
 			a = new RoomInfoAction();
 			break;
-
+		case "searchedRoomInfo":
+			a = new SearchedRoomInfo();
+			break;
 		}
 		try {
 			url = a.execute(request);
