@@ -9,7 +9,7 @@ public class LoginUI implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		return "login.jsp";
+		return "login.html";
 	}
 
 }

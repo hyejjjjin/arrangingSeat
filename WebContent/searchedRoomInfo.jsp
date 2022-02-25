@@ -27,7 +27,7 @@
 			<c:forEach var="i" begin="1" end="${roomVO.rowCount}">
 				<tr>
 					<c:forEach var="j" begin="1" end="${roomVO.colCount}">
-					<td>여석</td>
+					<td style="width:50px; height:20px;"></td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
@@ -43,7 +43,7 @@
 			<th>개수</th>
 			<tr>
 				<td>노트북</td>
-				<td></td>
+				<td>${roomVO.labtop}</td>
 			</tr>
 			<tr>
 				<td>캐비넷</td>

@@ -48,7 +48,7 @@
 		<input class="btn btn-primary" type="button" value="조회" onclick="requestRoomInfo()">
 		<hr style='border: solid 2px black'>
 	</c:if>
-	<div>
+	<div id="roomInfo">
 		강의실을 선택하세요
 	</div>
 	
@@ -72,7 +72,7 @@
 		}
 	} //XMLHttpRequest 객체 생성
 	
-	function requestRoomInfo(URL) {
+	function requestRoomInfo() {
 		console.log("여긴 잘 타나?");
 		roomNumber = document.querySelector('select').value;
 		URL = "controller?cmd=searchRoomAction";// encodeURIComponent(param); //URL에 전송한 데이터 추가
@@ -87,9 +87,11 @@
 			if(xhr.status == 200) {
 				var str = xhr.responseText; //서버에서 보낸 내용 받기
 				//document.querySelectorAll('tr')[1].querySelectorAll('td')[1]= str; //요소 콘텐츠 변경
-				
-				console.log(typeof str);
 				console.log(str);
+				console.log(typeof str);
+				//document.querySelector('div').innerHTML = str;
+				var ele = document.getElementById("roomInfo");
+				ele.innerHTML = str;
 			} else {
 				alert("Fail : "+ xhr.status);
 			}

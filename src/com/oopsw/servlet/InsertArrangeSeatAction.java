@@ -8,8 +8,6 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.oopsw.javabean.ArrangeSeatListVO;
 import com.oopsw.javabean.SeatHistory;
 import com.oopsw.javabean.SeatHistoryDAO;
