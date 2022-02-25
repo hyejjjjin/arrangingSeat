@@ -30,6 +30,7 @@ public class InsertArrangeSeatAction implements Action {
 		String endDate = request.getParameter("endDate");
 	    
 		String seatHistoryInfo = request.getParameter("seatHistorysInfo");
+		
 		String[] memberSeatHistory =  seatHistoryInfo.split("/");
 		Collection<SeatHistory> seatHistoryList = new ArrayList<SeatHistory>();
 		for(String s : memberSeatHistory) {

@@ -95,6 +95,9 @@ public class ControllerServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ArrangeSeatDateException e) {
+			request.setAttribute("dateError", true);
+			url = "arrangeSeat.jsp";
 		}
 
 		request.getRequestDispatcher("/" + url).forward(request, response);

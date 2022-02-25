@@ -17,8 +17,8 @@
      margin-bottom: 10px;
    }
   </style>
-<script>
-  
+<script type="text/javascript">
+  if("${dateError}")  alert("날짜를 확인해주세요");
 </script>
 <style type="text/css">
 	table {
@@ -114,12 +114,13 @@
 	<div align="right">
 		<input type="button" value="자리확정하기" onclick="insertArrangeSeat()">
 	</div>
-	
+	    <input type="hidden" name="seatHistorysInfo" id="seatHistorysInfo" >
 	</form>
 	
 
 <script type="text/javascript">
             var rows = document.getElementsByTagName("tr");
+            var k = document.getElementById("seatHistorysInfo");
 		     //console.log(rows.length+"row");
 		     var s = "";
 		    <c:forEach items="${list.seatHistoryList}" var="item">
@@ -132,9 +133,12 @@
 		      	s += (row-1)+"-"+col+"-"+"${item.memberId}"+"/";
 		     </c:forEach>
 		     
+		     
 		     function insertArrangeSeat() {
+		    	 k.value=s;
 		 		var theForm = document.seat;
-		 		theForm.action = "controller?cmd=insertSeatHistoryAction&seatHistorysInfo="+s;
+		 		theForm.action = "controller?cmd=insertSeatHistoryAction";    
+		 		
 		        theForm.submit();
 		 	};
 		 	

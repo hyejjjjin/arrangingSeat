@@ -81,6 +81,7 @@
 		   </c:forEach> 
 		   
 		</table>
+		
 		<script type="text/javascript">
 		    var rows = document.getElementsByTagName("tr");
 		     //console.log(rows.length+"row");

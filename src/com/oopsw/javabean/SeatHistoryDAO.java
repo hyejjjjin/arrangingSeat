@@ -96,4 +96,33 @@ public class SeatHistoryDAO {
 
 		return true;
 	}
+	
+	public boolean SeatHistoryCheck(String startDate, String endDate, int educationNumber) throws SQLException {
+		boolean result = true;
+		String sql = "select * from seat_historys where education_number=? and "
+				+ "((arranging_start_date<=? and arranging_end_date >=?) "
+				+ "or (arranging_start_date<=? and arranging_end_date <=?) "
+				+ "or (arranging_start_date>=? and arranging_end_date>=?) "
+				+ "or (arranging_start_date>=? and arranging_end_date <=?))";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, educationNumber);
+		pstmt.setString(2, startDate);
+		pstmt.setString(4, startDate);
+		pstmt.setString(6, startDate);
+		pstmt.setString(8, startDate);
+		
+		pstmt.setString(3, endDate);
+		pstmt.setString(5, endDate);
+		pstmt.setString(7, endDate);
+		pstmt.setString(9, endDate);
+
+		
+		ResultSet rs = pstmt.executeQuery();
+		if(rs.next()) result = false;
+		rs.close();
+		pstmt.close();
+
+		return result;
+	}
+	
 }

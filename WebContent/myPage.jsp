@@ -44,7 +44,7 @@
 			<div>
 				${memberVO.name}
 				<span class="badge badge-primary text-wrap" style="width: 10rem; background-color:#89BFFF;">${memberVO.educationName}(${memberVO.roomLocation})</span>
-				<c:if test="${isLeader == true}">
+				<c:if test="${memberVO.isLeader == true}">
 					<span class="badge badge-primary text-wrap" style="width: 6rem; background-color:#FF8989;">반장</span>
 				</c:if>
 			</div>
